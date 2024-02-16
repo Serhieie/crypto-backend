@@ -3,7 +3,7 @@ const { handleMongooseError } = require("../helpers");
 
 const assetSchema = new Schema(
   {
-    id: {
+    assetId: {
       type: String,
       required: true,
     },
@@ -62,7 +62,7 @@ const assetSchema = new Schema(
 const Joi = require("joi");
 
 const createAssetSchema = Joi.object({
-  id: Joi.string().required(),
+  assetId: Joi.string().required(),
   amount: Joi.number().required(),
   price: Joi.number().required(),
   date: Joi.number().required(),
@@ -77,7 +77,7 @@ const createAssetSchema = Joi.object({
 });
 
 const updateAssetSchema = Joi.object({
-  id: Joi.string(),
+  assetId: Joi.string(),
   amount: Joi.number(),
   price: Joi.number(),
   date: Joi.number(),

@@ -119,7 +119,7 @@ const updateAssetSchema = Joi.object({
   growPercent: Joi.number(),
   totalAmount: Joi.number(),
   totalProfit: Joi.number(),
-  owner: Joi.array(),
+  owner: Joi.object(),
   grow: Joi.boolean(),
   name: Joi.string(),
   priceAverage: Joi.number(),

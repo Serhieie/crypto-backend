@@ -43,6 +43,10 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    changePasswordCode: {
+      type: String,
+      default: "",
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -63,6 +67,10 @@ const verifySchema = Joi.object({
   email: Joi.string().pattern(userRegex).required(),
 });
 
+const passwordChangingSchema = Joi.object({
+  password: Joi.string().required(),
+});
+
 const loginSchema = Joi.object({
   email: Joi.string().pattern(userRegex).required(),
   password: Joi.string().min(6).required(),
@@ -74,6 +82,7 @@ const schemas = {
   loginSchema,
   registrationSchema,
   verifySchema,
+  passwordChangingSchema,
 };
 
 module.exports = { User, schemas };

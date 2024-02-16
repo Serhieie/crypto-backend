@@ -3,7 +3,7 @@ const HttpError = require("./Httperror");
 const handleMongooseError = require("./handleMongooseError");
 const sendEmailGrit = require("./sendEmailGrit");
 const sendEmailMeta = require("./sendEmailMeta");
-const createVerifyEmailMarkup = require("./verifyEmailMarkup");
+const createVerifyEmailMarkup = require("./emails/verifyEmailMarkup");
 
 module.exports = {
   HttpError,

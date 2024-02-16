@@ -1,16 +1,13 @@
 const bcrypt = require("bcryptjs");
-
+const createVerifyMarkupMessage = require("../helpers/views/verifyMarkupMessage");
+const createChangePasswordEmailMarkup = require("../helpers/emails/createChangePasswordEmailMarkup");
+const createVerifyEmailMarkup = require("../helpers/emails/verifyEmailMarkup");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs/promises");
 const gravatar = require("gravatar");
 require("dotenv").config();
-const {
-  HttpError,
-  ctrlWrapper,
-  sendEmailGrit,
-  createVerifyEmailMarkup,
-} = require("../helpers");
+const { HttpError, ctrlWrapper, sendEmailGrit } = require("../helpers");
 const { User } = require("../models/user");
 const { nanoid } = require("nanoid");
 
@@ -54,9 +51,8 @@ const verifyEmail = async (req, res) => {
   const user = await User.findOne({ verificationCode });
   if (!user) throw HttpError(401, "Email already verifyed");
   await User.findByIdAndUpdate(user._id, { verify: true, verificationCode: "" });
-  res.json({
-    message: "Email verify success",
-  });
+  const modalHtml = createVerifyMarkupMessage();
+  res.send(modalHtml);
 };
 
 const resentVerifyEmail = async (req, res) => {
@@ -127,6 +123,40 @@ const updtAvatar = async (req, res) => {
   });
 };
 
+const changePasswordRequest = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) throw HttpError(401, "Email not found");
+  if (!user.verify) throw HttpError(401, "Email is not yet verify");
+  const changePasswordCode = nanoid();
+  await User.findByIdAndUpdate(user._id, { changePasswordCode });
+  const verEmail = {
+    to: email,
+    subject: "Change password email",
+    html: createChangePasswordEmailMarkup(changePasswordCode),
+  };
+  await sendEmailGrit(verEmail);
+  res.json({
+    message: `Email was sended to ${email} for changing password`,
+  });
+};
+
+const passwordChanging = async (req, res) => {
+  const { changePasswordCode } = req.params;
+  const { password } = req.body;
+  const user = await User.findOne({ changePasswordCode });
+  if (!user) throw HttpError(401);
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await User.findByIdAndUpdate(user._id, {
+    password: hashedPassword,
+    changePasswordCode: "",
+  });
+
+  res.status(201).json({
+    message: "Change password success",
+  });
+};
+
 module.exports = {
   register: ctrlWrapper(register),
   verifyEmail: ctrlWrapper(verifyEmail),
@@ -135,4 +165,6 @@ module.exports = {
   current: ctrlWrapper(current),
   logout: ctrlWrapper(logout),
   updtAvatar: ctrlWrapper(updtAvatar),
+  changePasswordRequest: ctrlWrapper(changePasswordRequest),
+  passwordChanging: ctrlWrapper(passwordChanging),
 };

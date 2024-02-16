@@ -1,4 +1,4 @@
-const createVerifyMarkupMessage = () => {
+const createEmailIsVerifiedMessage = () => {
   const verifyMarkupMessage = `
     <!DOCTYPE html>
     <html lang="en">
@@ -69,7 +69,7 @@ const createVerifyMarkupMessage = () => {
     </head>
     <body>
         <div class="container">
-            <h1>Thank you! Email verification succes</h1>
+            <h1>Your email already verified</h1>
             <p>Lets start to use crypto-helper</p>
             <p><a class="button" href="https://serhieie.github.io/Crypto-tutor/">To login</a></p>
         </div>
@@ -79,4 +79,4 @@ const createVerifyMarkupMessage = () => {
   return verifyMarkupMessage;
 };
 
-module.exports = createVerifyMarkupMessage;
+module.exports = createEmailIsVerifiedMessage;

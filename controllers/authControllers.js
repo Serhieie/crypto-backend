@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const createVerifyMarkupMessage = require("../helpers/views/verifyMarkupMessage");
 const createChangePasswordEmailMarkup = require("../helpers/emails/createChangePasswordEmailMarkup");
+const createEmailIsVerifiedMessage = require("../helpers/views/emailIsVerified");
 const createVerifyEmailMarkup = require("../helpers/emails/verifyEmailMarkup");
 const jwt = require("jsonwebtoken");
 const path = require("path");
@@ -49,7 +50,11 @@ const register = async (req, res) => {
 const verifyEmail = async (req, res) => {
   const { verificationCode } = req.params;
   const user = await User.findOne({ verificationCode });
-  if (!user) throw HttpError(401, "Email already verifyed");
+  if (!user) {
+    const modalHtml = createEmailIsVerifiedMessage();
+    res.send(modalHtml);
+    throw HttpError(401, "Email already verifyed");
+  }
   await User.findByIdAndUpdate(user._id, { verify: true, verificationCode: "" });
   const modalHtml = createVerifyMarkupMessage();
   res.send(modalHtml);

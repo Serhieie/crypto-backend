@@ -29,5 +29,12 @@ router.put(
   validateBody(schemas.updateAssetSchema),
   ctrl.update
 );
+router.put(
+  "/updateAll",
+  autenticate,
+  isValidId,
+  validateBody(schemas.updateAllAssetsSchema),
+  ctrl.updateAll
+);
 
 module.exports = router;

@@ -30,22 +30,21 @@ const update = async (req, res) => {
   res.json(result);
 };
 
-const updateAll = async (req, res) => {
+const updateAllAssets = async (req, res) => {
   const { _id: owner } = req.user;
-  const { assets } = req.body;
   const updatedAssets = await Promise.all(
-    assets.map(async (asset) => {
-      const { id, ...updateData } = asset;
-      const existingAsset = await Asset.findOne({ _id: id, owner });
+    [...req.body].map(async (asset) => {
+      const { _id, ...updateData } = asset;
+      const existingAsset = await Asset.findOne({ _id, owner });
       if (!existingAsset) {
         throw new HttpError(
           404,
-          `Asset with id ${id} not found or does not belong to this owner`
+          `Asset with id ${_id} not found or does not belong to this owner`
         );
       }
-      const updatedAsset = await Asset.findByIdAndUpdate(id, updateData, { new: true });
+      const updatedAsset = await Asset.findByIdAndUpdate(_id, updateData, { new: true });
       if (!updatedAsset) {
-        throw new HttpError(404, `Asset with id ${id} not found`);
+        throw new HttpError(404, `Asset with id ${_id} not found`);
       }
       return updatedAsset;
     })
@@ -84,7 +83,7 @@ module.exports = {
   getAll: ctrlWrapper(getAll),
   getById: ctrlWrapper(getById),
   update: ctrlWrapper(update),
-  updateAll: ctrlWrapper(updateAll),
+  updateAllAssets: ctrlWrapper(updateAllAssets),
   remove: ctrlWrapper(remove),
   updateFavorite: ctrlWrapper(updateFavorite),
   post: ctrlWrapper(post),

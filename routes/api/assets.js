@@ -23,18 +23,18 @@ router.patch(
 router.delete("/:id", autenticate, isValidId, ctrl.remove);
 
 router.put(
+  "/updateAll",
+  autenticate,
+  validateBody(schemas.updateAllAssetsSchema),
+  ctrl.updateAllAssets
+);
+
+router.put(
   "/:id",
   autenticate,
   isValidId,
   validateBody(schemas.updateAssetSchema),
   ctrl.update
-);
-router.put(
-  "/updateAll",
-  autenticate,
-  isValidId,
-  validateBody(schemas.updateAllAssetsSchema),
-  ctrl.updateAll
 );
 
 module.exports = router;

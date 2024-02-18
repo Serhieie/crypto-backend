@@ -4,9 +4,14 @@ const { SEND_GRID_API_KEY } = process.env;
 sandGrid.setApiKey(SEND_GRID_API_KEY);
 
 const sendEmailGrit = async (data) => {
-  const email = { ...data, from: "bohdanserhieiev@gmail.com" };
-  await sandGrid.send(email);
-  return true;
+  try {
+    const email = { ...data, from: "bohdanserhieiev@gmail.com" };
+    await sandGrid.send(email);
+    return true;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new Error("Error sending email");
+  }
 };
 
 module.exports = sendEmailGrit;

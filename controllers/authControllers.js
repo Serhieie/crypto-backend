@@ -73,7 +73,6 @@ const resentVerifyEmail = async (req, res) => {
   };
 
   await sendEmailGrit(verEmail);
-
   res.json({
     message: "Email verify send success",
   });

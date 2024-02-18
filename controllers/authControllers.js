@@ -91,6 +91,7 @@ const login = async (req, res) => {
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   if (user.changePasswordCode)
     await User.findByIdAndUpdate(user._id, { token, changePasswordCode: "" });
+  else await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
     user: {

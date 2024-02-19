@@ -13,11 +13,13 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
       rel="stylesheet"
     />
     <style>
-        body {
-           font-family: Montserrat, sans-serif;
+        .body {
+                   font-family: Montserrat, sans-serif;
+            width: 100%;
+            height:100%;
             margin: 0;
             padding: 0;
-             background-color: #1E293B;
+              background-color: #1E293B;
         }
 
         .container {

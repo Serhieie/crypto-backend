@@ -28,7 +28,7 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
             margin: 20px auto 40px;
             padding: 20px;
            background-color: #0F172A;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
               border-radius: 10px;
         }
 

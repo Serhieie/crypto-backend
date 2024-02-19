@@ -20,6 +20,7 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
             margin: 0;
             padding: 30px 15px;
               background-color: #1E293B;
+               border-radius: 12px;
         }
 
         .container {
@@ -27,7 +28,7 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
             margin: 20px auto 40px;
             padding: 20px;
            background-color: #0F172A;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
         }
 

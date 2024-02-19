@@ -25,7 +25,8 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
             max-width: 600px;
             margin: 20px auto 40px;
             padding: 20px;
-            background-color: #ffffff;
+            color:white;
+            background-color: white;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -47,7 +48,7 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
             width: 160px;
             font-size: 18px;
             background-color: #007bff;
-            color: #ffffff;
+            color: white;
             text-decoration: none;
             text-align: center;
             margin: 30px auto 0px;
@@ -58,6 +59,7 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
 
         .button:hover {
             background-color: #0056b3;
+            color: white
         }
 
         .text {
@@ -73,7 +75,7 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
         <p>Dear User,</p>
         <p>You have received this email because someone (possibly you) trying to change password.</p>
         <p>To complete changing password, please click the button below to change your password:</p>
-        <p><a class="button" target="_blank" href="https://serhieie.github.io/Crypto-tutor/changePassword/${changePasswordCode}">Change Password</a></p>
+        <p><a class="button" target="_blank" href="https://serhieie.github.io/crypto-helper/changePassword/${changePasswordCode}">Change Password</a></p>
     </div>
      <p class="text" >If you did not try to change password on our website, you can safely ignore this email.</p>
      <p class="text">Thank you!</p>

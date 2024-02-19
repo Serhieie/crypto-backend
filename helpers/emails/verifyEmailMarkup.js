@@ -18,7 +18,7 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
             width: 100%;
             height:100%;
             margin: 0;
-            padding: 0;
+            padding: 30px 15px;
               background-color: #1E293B;
         }
 

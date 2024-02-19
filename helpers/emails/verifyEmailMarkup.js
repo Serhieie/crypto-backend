@@ -14,11 +14,10 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
     />
     <style>
         body {
-            
             font-family: "Montserrat", sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
+             background-color: #1E293B;
         }
 
         .container {
@@ -26,7 +25,7 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
             max-width: 600px;
             margin: 20px auto 40px;
             padding: 20px;
-            background-color: #ffffff;
+           background-color: #0F172A;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -39,16 +38,18 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
         }
 
         p {
+            font-family: "Montserrat", sans-serif;
             color: #666666;
             font-size:18px;
         }
 
         .button {
+            font-family: "Montserrat", sans-serif;
             display: block;
             width: 160px;
             font-size: 18px;
             background-color: #007bff;
-            color: #ffffff;
+            color: white;
             text-decoration: none;
             text-align: center;
             margin: 30px auto 0px;
@@ -58,6 +59,7 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
         }
 
         .button:hover {
+                 color: white;
             background-color: #0056b3;
         }
 

@@ -48,7 +48,7 @@ const createVerifyMarkupMessage = () => {
                 width: 160px;
                 font-size: 18px;
                 background-color: #007bff;
-                color: #E2E8F0;
+                    color: white;
                 text-decoration: none;
                 text-align: center;
                 margin: 30px auto 0px;
@@ -58,6 +58,7 @@ const createVerifyMarkupMessage = () => {
             }
 
             .button:hover {
+                     color: white;
                 background-color: #0056b3;
             }
 

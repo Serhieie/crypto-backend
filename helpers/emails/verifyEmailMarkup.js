@@ -71,7 +71,8 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
 </head>
 
 <body>
-    <div class="container">
+<div class="body">
+   <div class="container">
         <h1>Email Verification</h1>
         <p>Dear User,</p>
         <p>You have received this email because someone (possibly you) registered on our website.</p>
@@ -79,7 +80,8 @@ const createVerifyEmailMarkup = (BASE_URL, verificationCode) => {
         <p><a class="button" target="_blank" href="${BASE_URL}/api/auth/verify/${verificationCode}">Verify Email</a></p>
     </div>
      <p class="text" >If you did not register on our website, you can safely ignore this email.</p>
-     <p class="text">Thank you!</p>
+     <p class="text">Thank you!</p></div>
+ 
 </body>
 
 </html>

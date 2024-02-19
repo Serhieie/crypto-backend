@@ -14,46 +14,41 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
     />
     <style>
         .body {
-            
             font-family: Montserrat, sans-serif;
             width: 100%;
             height:100%;
             margin: 0;
-                      padding: 30px 15px;
+            padding: 30px 15px;
               background-color: #1E293B;
         }
 
         .container {
-           font-family: Montserrat, sans-serif;
-            max-width: 600px;
+             max-width: 600px;
             margin: 20px auto 40px;
             padding: 20px;
-            color:#F1F5F9;
-                   background-color: #0F172A;
+           background-color: #0F172A;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
         }
 
         h1 {
-            font-family: Montserrat, sans-serif;
-            color: #CBD5E1;
+              color: #CBD5E1;
             text-align: center;
             margin-bottom: 20px;
         }
 
         p {
-            font-family: Montserrat, sans-serif;
-            color: #F1F5F9;
+                   color: #F1F5F9;
             font-size:18px;
         }
 
         .button {
-            font-family: Montserrat, sans-serif;
+          font-family: Montserrat, sans-serif;
             display: block;
             width: 160px;
             font-size: 18px;
             background-color: #007bff;
-            color: #F1F5F9;
+            color: white;
             text-decoration: none;
             text-align: center;
             margin: 30px auto 0px;
@@ -68,7 +63,8 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
         }
 
         .text {
-                   color: #F1F5F9;
+            font-family: "Montserrat", sans-serif;
+            color: #F1F5F9;
             text-align: center;
             font-size: 22px;
         }

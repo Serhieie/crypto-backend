@@ -13,45 +13,47 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
       rel="stylesheet"
     />
     <style>
-        body {
+        .body {
             
-            font-family: "Montserrat", sans-serif;
+            font-family: Montserrat, sans-serif;
+            width: 100%;
+            height:100%;
             margin: 0;
             padding: 0;
               background-color: #1E293B;
         }
 
         .container {
-            font-family: "Montserrat", sans-serif;
+           font-family: Montserrat, sans-serif;
             max-width: 600px;
             margin: 20px auto 40px;
             padding: 20px;
-            color:white;
+            color:#F1F5F9;
                    background-color: #0F172A;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-family: "Montserrat", sans-serif;
-            color: #333333;
+            font-family: Montserrat, sans-serif;
+            color: #CBD5E1;
             text-align: center;
             margin-bottom: 20px;
         }
 
         p {
-            font-family: "Montserrat", sans-serif;
-            color: #666666;
+            font-family: Montserrat, sans-serif;
+            color: #F1F5F9;
             font-size:18px;
         }
 
         .button {
-            font-family: "Montserrat", sans-serif;
+            font-family: Montserrat, sans-serif;
             display: block;
             width: 160px;
             font-size: 18px;
             background-color: #007bff;
-            color: white;
+            color: #F1F5F9;
             text-decoration: none;
             text-align: center;
             margin: 30px auto 0px;
@@ -62,10 +64,11 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
 
         .button:hover {
             background-color: #0056b3;
-            color: white
+            color: white;
         }
 
         .text {
+                   color: #F1F5F9;
             text-align: center;
             font-size: 22px;
         }
@@ -73,6 +76,7 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
 </head>
 
 <body>
+<div class="body">
     <div class="container">
         <h1>Change Password Email</h1>
         <p>Dear User,</p>
@@ -81,7 +85,8 @@ const createChangePasswordEmailMarkup = (changePasswordCode) => {
         <p><a class="button" target="_blank" href="https://serhieie.github.io/crypto-helper/changePassword/${changePasswordCode}">Change Password</a></p>
     </div>
      <p class="text" >If you did not try to change password on our website, you can safely ignore this email.</p>
-     <p class="text">Thank you!</p>
+     <p class="text">Thank you!</p></div>
+
 </body>
 
 </html>

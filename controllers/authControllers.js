@@ -165,7 +165,7 @@ const passwordChanging = async (req, res) => {
   });
 };
 
-const updateSubscription = async (req, res) => {
+const changeSubscription = async (req, res) => {
   const { _id } = req.user;
   const result = await User.findByIdAndUpdate(_id, req.body);
   if (!result) {
@@ -184,5 +184,5 @@ module.exports = {
   updtAvatar: ctrlWrapper(updtAvatar),
   changePasswordRequest: ctrlWrapper(changePasswordRequest),
   passwordChanging: ctrlWrapper(passwordChanging),
-  updateSubscription: ctrlWrapper(updateSubscription),
+  changeSubscription: ctrlWrapper(changeSubscription),
 };

@@ -76,6 +76,10 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+const changeSubscriptionSchema = Joi.object({
+  subscription: Joi.string().validate(...subscriptionList),
+});
+
 const User = model("user", userSchema);
 
 const schemas = {
@@ -83,6 +87,7 @@ const schemas = {
   registrationSchema,
   verifySchema,
   passwordChangingSchema,
+  changeSubscriptionSchema,
 };
 
 module.exports = { User, schemas };

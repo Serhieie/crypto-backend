@@ -165,6 +165,15 @@ const passwordChanging = async (req, res) => {
   });
 };
 
+const updateSubscription = async (req, res) => {
+  const { _id } = req.user;
+  const result = await User.findByIdAndUpdate(_id, req.body);
+  if (!result) {
+    throw HttpError(404);
+  }
+  res.json(result);
+};
+
 module.exports = {
   register: ctrlWrapper(register),
   verifyEmail: ctrlWrapper(verifyEmail),
@@ -175,4 +184,5 @@ module.exports = {
   updtAvatar: ctrlWrapper(updtAvatar),
   changePasswordRequest: ctrlWrapper(changePasswordRequest),
   passwordChanging: ctrlWrapper(passwordChanging),
+  updateSubscription: ctrlWrapper(updateSubscription),
 };

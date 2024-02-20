@@ -5,7 +5,7 @@ const { MT_PASS } = process.env;
 
 const nodemailerConfig = {
   host: "smtp.meta.ua",
-  port: 465, //25 465 2525
+  port: 465,
   secure: true,
   auth: {
     user: "Bohdanserhieiev@meta.ua",

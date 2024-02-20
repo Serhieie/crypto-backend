@@ -55,6 +55,11 @@ const assetSchema = new Schema(
       type: String,
       required: true,
     },
+    favorite: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -75,10 +80,11 @@ const createAssetSchema = Joi.object({
   priceAverage: Joi.number().required(),
   icon: Joi.string().required(),
   symbol: Joi.string().required(),
+  favorite: Joi.boolean(),
 });
 
 const updateAssetSchema = Joi.object({
-  _id: Joi.string(),
+  _id: Joi.string().required(),
   assetId: Joi.string(),
   amount: Joi.number(),
   price: Joi.number(),
@@ -92,11 +98,12 @@ const updateAssetSchema = Joi.object({
   priceAverage: Joi.number(),
   icon: Joi.string(),
   symbol: Joi.string(),
+  favorite: Joi.boolean(),
 });
 
 const updateAllAssetsSchema = Joi.array().items(
   Joi.object({
-    _id: Joi.string(),
+    _id: Joi.string().required(),
     assetId: Joi.string(),
     amount: Joi.number(),
     price: Joi.number(),
@@ -110,11 +117,12 @@ const updateAllAssetsSchema = Joi.array().items(
     priceAverage: Joi.number(),
     icon: Joi.string(),
     symbol: Joi.string(),
+    favorite: Joi.boolean(),
   })
 );
 
 const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean(),
+  favorite: Joi.boolean().required(),
 });
 
 assetSchema.post("save", handleMongooseError);

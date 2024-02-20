@@ -97,6 +97,7 @@ const login = async (req, res) => {
     user: {
       name,
       email,
+      avatarURL,
       subscription: user.subscription,
     },
     token,

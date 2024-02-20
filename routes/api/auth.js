@@ -24,6 +24,7 @@ router.post("/logout", autenticate, ctrl.logout);
 router.patch("/avatars", autenticate, upload.single("avatar"), ctrl.updtAvatar);
 router.put(
   "/subscription",
+  autenticate,
   validateBody(schemas.changeSubscriptionSchema),
   ctrl.changeSubscription
 );

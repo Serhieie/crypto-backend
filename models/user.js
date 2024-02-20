@@ -77,7 +77,7 @@ const loginSchema = Joi.object({
 });
 
 const changeSubscriptionSchema = Joi.object({
-  subscription: Joi.string().validate(...subscriptionList),
+  subscription: Joi.string(),
 });
 
 const User = model("user", userSchema);

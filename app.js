@@ -10,12 +10,16 @@ const assetsRouter = require("./routes/api/assets");
 
 const app = express();
 const httpServer = http.createServer(app);
-const PORT = process.env.PORT || 3000;
+const PORT = app.get("env") === "development" ? 3021 : process.env.PORT;
 
 const io = new Server(httpServer, {
   cors: {
     origin: "*",
   },
+});
+
+io.listen(PORT, () => {
+  console.log(`server running at ${PORT}`);
 });
 
 io.on("connection", (socket) => {
@@ -24,10 +28,6 @@ io.on("connection", (socket) => {
   socket.on("chat-message", (message) => {
     io.emit("chat-message", message);
   });
-});
-
-io.listen(PORT, () => {
-  console.log(`server running at ${PORT}`);
 });
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";

@@ -26,7 +26,9 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(PORT);
+io.listen(PORT, () => {
+  console.log(`server running at ${PORT}`);
+});
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 

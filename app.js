@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(PORT);
+httpServer.listen(PORT);
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 

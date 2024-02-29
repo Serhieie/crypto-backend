@@ -1,12 +1,29 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const { Server } = require("socket.io");
+const { createServer } = require("http");
 require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
 const assetsRouter = require("./routes/api/assets");
 
 const app = express();
+
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+  },
+});
+io.on("connection", (socket) => {
+  socket.on("chat-message", (message) => {
+    socket.broadcast.emit("chat-message", message);
+  });
+});
+
+// httpServer.listen(3001);
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -27,4 +44,4 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-module.exports = app;
+module.exports = httpServer;

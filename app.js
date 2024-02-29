@@ -2,33 +2,11 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
-const http = require("http");
-const { Server } = require("socket.io");
 
 const authRouter = require("./routes/api/auth");
 const assetsRouter = require("./routes/api/assets");
 
 const app = express();
-const httpServer = http.createServer(app);
-const PORT = app.get("env") === "development" ? 3021 : process.env.PORT;
-
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-  },
-});
-
-io.listen(PORT, () => {
-  console.log(`server running at ${PORT}`);
-});
-
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  socket.on("chat-message", (message) => {
-    io.emit("chat-message", message);
-  });
-});
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 

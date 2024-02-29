@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 mongoose.set("strictQuery", true);
 
 const httpServer = http.createServer(app);
-const listenThis = process.env.PORT || 3021;
+const listenThis = app.get("env") === "development" ? 3021 : process.env.PORT;
 
 const io = new Server(httpServer, {
   cors: {
@@ -15,16 +15,9 @@ const io = new Server(httpServer, {
   },
 });
 
-mongoose
-  .connect(DB_HOST)
-  .then(() => {
-    app.listen(PORT);
-    io.listen(listenThis);
-  })
-  .catch((error) => {
-    console.error("Error connecting to the database:", error.message);
-    process.exit(1);
-  });
+io.listen(PORT, () => {
+  console.log(`server running at ${PORT}`);
+});
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -32,8 +25,14 @@ io.on("connection", (socket) => {
   socket.on("chat-message", (message) => {
     io.emit("chat-message", message);
   });
-
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
 });
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    httpServer.listen(PORT);
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });

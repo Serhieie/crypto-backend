@@ -10,7 +10,6 @@ const assetsRouter = require("./routes/api/assets");
 
 const app = express();
 const httpServer = http.createServer(app);
-const PORT = app.get("env") === "development" ? 3021 : process.env.PORT;
 
 const io = new Server(httpServer, {
   cors: {
@@ -18,8 +17,8 @@ const io = new Server(httpServer, {
   },
 });
 
-io.listen(PORT, () => {
-  console.log(`server running at ${PORT}`);
+io.listen(80, () => {
+  console.log(`server running at 80`);
 });
 
 io.on("connection", (socket) => {

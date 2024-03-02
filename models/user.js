@@ -47,6 +47,14 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    online: {
+      type: Boolean,
+      default: false,
+    },
+    lastOnline: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { versionKey: false, timestamps: true }
 );

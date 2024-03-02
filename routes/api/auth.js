@@ -22,6 +22,7 @@ router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
 router.get("/current", autenticate, ctrl.current);
 router.post("/logout", autenticate, ctrl.logout);
 router.patch("/avatars", autenticate, upload.single("avatar"), ctrl.updtAvatar);
+router.patch("/choseAvatar", autenticate, ctrl.choseAvatar);
 router.put(
   "/subscription",
   autenticate,

@@ -79,7 +79,7 @@ const resentVerifyEmail = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) throw HttpError(401);
   if (!user.verify) throw HttpError(401, "Email is not verifyed");
@@ -90,15 +90,21 @@ const login = async (req, res) => {
   };
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   if (user.changePasswordCode)
-    await User.findByIdAndUpdate(user._id, { token, changePasswordCode: "" });
-  else await User.findByIdAndUpdate(user._id, { token });
+    await User.findByIdAndUpdate(user._id, {
+      token,
+      changePasswordCode: "",
+      online: true,
+    });
+  else await User.findByIdAndUpdate(user._id, { token, online: true });
 
   res.json({
     user: {
-      name,
+      id: user._id,
+      name: user.name,
       email,
       avatarURL: user.avatarURL,
       subscription: user.subscription,
+      start: user.createdAt,
     },
     token,
   });
@@ -106,12 +112,20 @@ const login = async (req, res) => {
 
 const current = async (req, res) => {
   const { email, name } = req.user;
-  res.json({ name, email });
+  const user = await User.findOne({ email });
+  res.json({
+    id: user._id,
+    name: user.name,
+    email,
+    avatarURL: user.avatarURL,
+    subscription: user.subscription,
+    start: user.createdAt,
+  });
 };
 
 const logout = async (req, res) => {
   const { _id } = req.user;
-  await User.findByIdAndUpdate(_id, { token: "" });
+  await User.findByIdAndUpdate(_id, { token: "", online: false, lastOnline: Date.now() });
   res.json({ message: "Logout succes" });
 };
 
@@ -126,6 +140,18 @@ const updtAvatar = async (req, res) => {
   res.json({
     user: {
       avatarURL,
+    },
+    message: "Success: Avatar changed successfully.",
+  });
+};
+
+const choseAvatar = async (req, res) => {
+  const { _id } = req.user;
+  const { pathToAnimal } = req.body;
+  await User.findByIdAndUpdate(_id, { avatarURL: `avatars/${pathToAnimal}` });
+  res.json({
+    user: {
+      avatarURL: `avatars/${pathToAnimal}`,
     },
     message: "Success: Avatar changed successfully.",
   });
@@ -183,6 +209,7 @@ module.exports = {
   current: ctrlWrapper(current),
   logout: ctrlWrapper(logout),
   updtAvatar: ctrlWrapper(updtAvatar),
+  choseAvatar: ctrlWrapper(choseAvatar),
   changePasswordRequest: ctrlWrapper(changePasswordRequest),
   passwordChanging: ctrlWrapper(passwordChanging),
   changeSubscription: ctrlWrapper(changeSubscription),

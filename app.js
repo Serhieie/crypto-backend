@@ -1,10 +1,9 @@
 const express = require("express");
-const { Message } = require("./models/message");
 const logger = require("morgan");
 const cors = require("cors");
 const { Server } = require("socket.io");
-const { User } = require("./models/user");
 const { createServer } = require("http");
+const { validateMessage } = require("./helpers/dirtFilter");
 require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
@@ -24,22 +23,13 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("chat-message", async ({ message, senderName, senderEmail }) => {
+  socket.on("chat-message", async ({ message, sender }) => {
     try {
-      const user = await User.findOne({ name: senderName, email: senderEmail });
-      if (!user) {
-        throw new Error("User not found");
-      }
-      const newMessage = new Message({
-        message,
-        sender: user._id,
-        senderName,
-        senderEmail,
-      });
+      const newMessage = await validateMessage(message, sender);
       await newMessage.save();
       io.emit("chat-message", newMessage);
     } catch (error) {
-      console.error("Error saving message:", error.message);
+      console.error(error.message);
     }
   });
 });

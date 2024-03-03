@@ -12,13 +12,12 @@ const messageSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    senderEmail: {
-      type: String,
-      required: true,
-    },
-    senderName: {
-      type: String,
-      required: true,
+    senderInfo: {
+      avatarURL: String,
+      email: String,
+      name: String,
+      start: String,
+      subscription: String,
     },
   },
   { versionKey: false, timestamps: true }
@@ -27,9 +26,14 @@ const messageSchema = new mongoose.Schema(
 const changeMessageSchema = Joi.object({
   message: Joi.string().required(),
   sender: Joi.string().required(),
-  senderEmail: Joi.string().required(),
+  senderInfo: Joi.object({
+    avatarURL: Joi.string().required(),
+    email: Joi.string().required(),
+    name: Joi.string().required(),
+    start: Joi.string().required(),
+    subscription: Joi.string().required(),
+  }).required(),
 });
-
 const schemas = {
   changeMessageSchema,
 };

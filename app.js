@@ -4,6 +4,7 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const { createServer } = require("http");
 const { validateMessage } = require("./helpers/dirtFilter");
+// const webSocketLogout = require("./helpers/webSocketLogout");
 require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
@@ -29,8 +30,12 @@ io.on("connection", (socket) => {
       await newMessage.save();
       io.emit("chat-message", newMessage);
     } catch (error) {
-      console.error(error.message);
+      throw error;
     }
+  });
+  socket.on("disconnect", () => {
+    const userId = socket.handshake.query.userId;
+    console.log("A user disconnected", userId);
   });
 });
 
